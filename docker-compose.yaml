@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ghost:
+    image: ghost:latest
+    container_name: ghost
+    restart: always
+    ports:
+      - 2368:2368
+    environment:
+      - url=https://emlog.app
+      - database__client=sqlite3
+      - database__connection__filename=/var/lib/ghost/content/data/ghost.db
+      - NODE_ENV=production
+    volumes:
+      - ./content:/var/lib/ghost/content
+      - ./config:/var/lib/ghost/config
+    networks:
+      - ghost-network
+
+networks:
+  ghost-network:
+    driver: bridge
