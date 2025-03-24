@@ -12,7 +12,7 @@ apt-get upgrade -y
 
 # Install required packages
 echo "Installing required packages..."
-apt-get install -y nginx docker.io docker-compose
+apt-get install -y nginx docker.io docker-compose openssl
 
 # Start and enable Docker
 echo "Setting up Docker..."
@@ -24,6 +24,14 @@ echo "Creating necessary directories..."
 mkdir -p /var/www/ghost
 mkdir -p /etc/nginx/sites-available
 mkdir -p /etc/nginx/sites-enabled
+mkdir -p /etc/nginx/ssl
+
+# Generate self-signed SSL certificate
+echo "Generating self-signed SSL certificate..."
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout /etc/nginx/ssl/self-signed.key \
+    -out /etc/nginx/ssl/self-signed.crt \
+    -subj "/C=US/ST=State/L=City/O=Organization/CN=test.emlog.app"
 
 # Setup nginx configuration
 echo "Setting up nginx configuration..."
