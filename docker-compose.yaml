@@ -14,8 +14,9 @@ services:
       - server__port=2368
       - server__host=0.0.0.0
       - server__socket=0.0.0.0:2368
-      - server__https=true
-      - server__force_https=true
+      - server__https=false
+      - server__force_https=false
+      - server__trust_proxy=true
     volumes:
       - ghost-content:/var/lib/ghost/content
       - ghost-config:/var/lib/ghost/config
