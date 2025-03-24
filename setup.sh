@@ -27,7 +27,7 @@ mkdir -p /etc/nginx/sites-enabled
 
 # Copy configuration files
 echo "Copying configuration files..."
-cp /root/emlog-app/nginx.conf /etc/nginx/sites-available/ghost
+cp nginx.conf /etc/nginx/sites-available/ghost
 
 # Remove default site if it exists
 if [ -f /etc/nginx/sites-enabled/default ]; then
@@ -40,7 +40,7 @@ ln -sf /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
 # Copy docker-compose file
 echo "Setting up Docker configuration..."
-cp /root/emlog-app/docker-compose.yaml /var/www/ghost/
+cp docker-compose.yaml /var/www/ghost/
 
 # Test and reload nginx
 echo "Testing Nginx configuration..."
