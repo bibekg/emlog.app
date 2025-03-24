@@ -56,6 +56,6 @@ docker-compose up -d
 
 # Setup SSL with Let's Encrypt
 echo "Setting up SSL certificate..."
-certbot --nginx -d emlog.app --non-interactive --agree-tos --email your-email@example.com
+certbot --nginx -d emlog.app --non-interactive --agree-tos --email ghim.bibek@gmail.com
 
 echo "Setup completed successfully!" 
