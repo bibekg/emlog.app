@@ -12,7 +12,7 @@ apt-get upgrade -y
 
 # Install required packages
 echo "Installing required packages..."
-apt-get install -y nginx docker.io docker-compose certbot python3-certbot-nginx
+apt-get install -y nginx docker.io docker-compose
 
 # Start and enable Docker
 echo "Setting up Docker..."
@@ -25,29 +25,15 @@ mkdir -p /var/www/ghost
 mkdir -p /etc/nginx/sites-available
 mkdir -p /etc/nginx/sites-enabled
 
-# Get SSL certificate first
-echo "Getting SSL certificate..."
-certbot --nginx -d test.emlog.app --non-interactive --agree-tos --email ghim.bibek@gmail.com
-
-# Copy configuration files
-echo "Copying configuration files..."
+# Setup nginx configuration
+echo "Setting up nginx configuration..."
 cp nginx.conf /etc/nginx/sites-available/ghost
-
-# Remove default site if it exists
-if [ -f /etc/nginx/sites-enabled/default ]; then
-    rm /etc/nginx/sites-enabled/default
-fi
-
-# Create symbolic link for ghost site
-echo "Setting up Nginx configuration..."
 ln -sf /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
+rm -f /etc/nginx/sites-enabled/default
 
-# Test nginx configuration
-echo "Testing Nginx configuration..."
+# Test and reload nginx
+echo "Testing and reloading nginx..."
 nginx -t
-
-# Reload nginx
-echo "Reloading Nginx..."
 systemctl reload nginx
 
 # Copy docker-compose file
