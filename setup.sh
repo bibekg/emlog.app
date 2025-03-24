@@ -25,6 +25,10 @@ mkdir -p /var/www/ghost
 mkdir -p /etc/nginx/sites-available
 mkdir -p /etc/nginx/sites-enabled
 
+# Get SSL certificate first
+echo "Getting SSL certificate..."
+certbot --nginx -d test.emlog.app --non-interactive --agree-tos --email ghim.bibek@gmail.com
+
 # Copy configuration files
 echo "Copying configuration files..."
 cp nginx.conf /etc/nginx/sites-available/ghost
@@ -46,10 +50,6 @@ nginx -t
 echo "Reloading Nginx..."
 systemctl reload nginx
 
-# Get SSL certificate
-echo "Getting SSL certificate..."
-certbot --nginx -d test.emlog.app --non-interactive --agree-tos --email ghim.bibek@gmail.com
-
 # Copy docker-compose file
 echo "Setting up Docker configuration..."
 cp docker-compose.yaml /var/www/ghost/
@@ -60,4 +60,4 @@ cd /var/www/ghost
 docker-compose up -d
 
 echo "Setup completed successfully!"
-echo "You can now access Ghost at http://localhost" 
+echo "You can now access Ghost at https://test.emlog.app" 
