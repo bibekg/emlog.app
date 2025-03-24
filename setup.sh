@@ -12,7 +12,7 @@ apt-get upgrade -y
 
 # Install required packages
 echo "Installing required packages..."
-apt-get install -y nginx docker.io docker-compose
+apt-get install -y nginx docker.io docker-compose certbot python3-certbot-nginx
 
 # Start and enable Docker
 echo "Setting up Docker..."
@@ -38,16 +38,21 @@ fi
 echo "Setting up Nginx configuration..."
 ln -sf /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
-# Copy docker-compose file
-echo "Setting up Docker configuration..."
-cp docker-compose.yaml /var/www/ghost/
-
-# Test and reload nginx
+# Test nginx configuration
 echo "Testing Nginx configuration..."
 nginx -t
 
+# Reload nginx
 echo "Reloading Nginx..."
 systemctl reload nginx
+
+# Get SSL certificate
+echo "Getting SSL certificate..."
+certbot --nginx -d test.emlog.app --non-interactive --agree-tos --email ghim.bibek@gmail.com
+
+# Copy docker-compose file
+echo "Setting up Docker configuration..."
+cp docker-compose.yaml /var/www/ghost/
 
 # Start Ghost
 echo "Starting Ghost..."
