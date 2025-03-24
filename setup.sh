@@ -31,7 +31,7 @@ echo "Generating self-signed SSL certificate..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/self-signed.key \
     -out /etc/nginx/ssl/self-signed.crt \
-    -subj "/C=US/ST=State/L=City/O=Organization/CN=test.emlog.app"
+    -subj "/C=US/ST=CA/L=SanFrancisco/O=Emlog/CN=test.emlog.app"
 
 # Setup nginx configuration
 echo "Setting up nginx configuration..."
