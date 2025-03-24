@@ -13,7 +13,7 @@ This repository contains configuration files for deploying a Ghost blog on a Dig
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/emlog-app.git
+   git clone https://github.com/bibekg/emlog.app.git
    ```
 
 2. Copy the files to your DigitalOcean droplet:
