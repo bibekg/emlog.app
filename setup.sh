@@ -31,6 +31,10 @@ cp nginx.conf /etc/nginx/sites-available/ghost
 ln -sf /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 rm -f /etc/nginx/sites-enabled/default
 
+# Setup Cloudflare IP ranges
+echo "Setting up Cloudflare IP ranges..."
+curl -s https://www.cloudflare.com/ips-v4 | sed 's/^/set_real_ip_from /;s/$/;/' > /etc/nginx/cloudflare.conf
+
 # Test and reload nginx
 echo "Testing and reloading nginx..."
 nginx -t
