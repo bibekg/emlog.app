@@ -12,7 +12,7 @@ apt-get upgrade -y
 
 # Install required packages
 echo "Installing required packages..."
-apt-get install -y nginx docker.io docker-compose certbot python3-certbot-nginx
+apt-get install -y nginx docker.io docker-compose
 
 # Start and enable Docker
 echo "Setting up Docker..."
@@ -54,8 +54,5 @@ echo "Starting Ghost..."
 cd /var/www/ghost
 docker-compose up -d
 
-# Setup SSL with Let's Encrypt
-echo "Setting up SSL certificate..."
-certbot --nginx -d emlog.app --non-interactive --agree-tos --email ghim.bibek@gmail.com
-
-echo "Setup completed successfully!" 
+echo "Setup completed successfully!"
+echo "You can now access Ghost at http://localhost" 
