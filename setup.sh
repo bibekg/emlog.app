@@ -43,6 +43,18 @@ cp docker-compose.yaml /var/www/ghost/
 # Start Ghost
 echo "Starting Ghost..."
 cd /var/www/ghost
+
+# Clean up any existing containers and volumes
+echo "Cleaning up existing containers and volumes..."
+docker-compose down -v || true
+
+# Create volumes first
+echo "Creating Docker volumes..."
+docker volume create ghost-content || true
+docker volume create ghost-config || true
+
+# Start Ghost
+echo "Starting Ghost container..."
 docker-compose up -d
 
 echo "Setup completed successfully!"
