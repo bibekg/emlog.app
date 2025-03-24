@@ -7,7 +7,7 @@ services:
     ports:
       - 2368:2368
     environment:
-      - url=http://test.emlog.app
+      - url=https://test.emlog.app
       - database__client=sqlite3
       - database__connection__filename=/var/lib/ghost/content/data/ghost.db
       - NODE_ENV=production
